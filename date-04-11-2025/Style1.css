@@ -4,7 +4,6 @@
     padding: 0;
     box-sizing: border-box;
     }
-
     body {
     background-color: #d9d9d9;
     display: flex;
@@ -12,7 +11,6 @@
     align-items: center;
     height: 100vh;
     }
-
     .dashboard {
     width: 50%;
     height: 90vh;
@@ -24,8 +22,6 @@
     gap: 10px;
     padding: 10px;
     }
-
-    /* Top Navigation Bar */
     .topbar {
     grid-column: span 2;
     background-color: #b14545;
@@ -35,32 +31,25 @@
     justify-content: space-between;
     padding: 0 20px;
     }
-
     .circle {
     width: 50px;
     height: 50px;
     background-color: #d9d9d9;
     border-radius: 50%;
     }
-
     .nav-buttons {
     display: flex;
     gap: 15px;
     }
-
     .nav-item {
     width: 80px;
     height: 35px;
     background-color: #d9d9d9;
-
     }
-
     .nav-item.large {
     width: 180px;
     border-radius: 15px;
     }
-
-    /* Sidebar */
     .sidebar {
     background-color: #c28484;
     border-radius: 15px;
@@ -70,15 +59,12 @@
     align-items: center;
     padding: 10px 0;
     }
-
     .side-block {
     width: 80%;
     height: 40px;
     background-color: #e6dede;
     border-radius: 10px;
     }
-
-    /* Main Content Area */
     .content {
     background-color: #9b7c7c;
     border-radius: 15px;
@@ -87,20 +73,17 @@
     flex-direction: column;
     justify-content: space-between;
     }
-
     .top-widgets {
     display: flex;
     justify-content: space-between;
     gap: 20px;
     }
-
     .widget {
     flex: 1;
     background-color: #e6dede;
     border-radius: 20px;
     height: 160px;
     }
-
     .middle-row{
     display: flex;
     justify-content: space-between;
@@ -110,22 +93,17 @@
     .bottom-row{
         display: flex;
         justify-content: center;
-        
-
     }
     .mall-box{
     background-color: #e6dede;
     height: 60px;
     width:195px;
-
     }
-
     .small-box {
     flex: 1;
     background-color: #e6dede;
     height: 60px;
     }
-
     .large-box {
     flex: 2;
     background-color: #e6dede;
