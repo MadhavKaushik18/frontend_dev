@@ -1,0 +1,27 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Boolean Logic Access System</title>
+    </head>
+    <body>
+    <h2>Boolean Logic Access System</h2>
+    <p id="output"></p>
+    <script>
+        let isDoorLocked = true;
+        let isWindowClosed = true;
+        let isAlarmOn = true;
+        let isOwnerInside = true;
+
+        let isSecure = isAlarmOn && isDoorLocked && isWindowClosed && isOwnerInside;
+        let status = isSecure ? "Secure" : "Unsafe";
+
+        document.getElementById("output").innerHTML = `
+        Door Locked: ${isDoorLocked}<br>
+        Window Closed: ${isWindowClosed}<br>
+        Alarm On: ${isAlarmOn}<br>
+        Owner Inside: ${isOwnerInside}<br><br>
+        System Status: <b>${status}</b>
+        `;
+    </script>
+    </body>
+    </html>
