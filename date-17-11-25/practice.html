@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello</h1>
+    <input type="text" placeholder="Enter . . . " id="inputdata"/>
+    <buttton id="btn-click">Add</buttton>
+    <ul id="ulid"></ul>
+    <Script>
+        function summit(){
+            let inputData=document.getElementById("inputdata").value;
+            let li=document.createElement("li");
+            let btn=document.createElement("button");
+            btn.innerText="Delete";
+            
+            li.innerText=inputData;
+            let ul = document.getElementById("ulid");
+            ul.appendChild(li);
+            li.appendChild(btn);
+            btn.addEventListener("click",function(){
+                li.remove();
+            })
+        
+        }
+    </Script>
+</body>
+</html>
