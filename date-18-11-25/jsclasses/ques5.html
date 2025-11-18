@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Ticket Booking</title>
+    <style>
+        .error { color: red; }
+        .invalid { border: 2px solid red; }
+        .valid { border: 2px solid green; }
+    </style>
+</head>
+<body>
+
+<h2>Movie Ticket Booking</h2>
+
+<form id="ticketForm">
+    <label>Name:</label><br>
+    <input type="text" id="name"><br>
+    <span id="nameErr" class="error"></span><br>
+
+    <label>Email:</label><br>
+    <input type="text" id="email"><br>
+    <span id="emailErr" class="error"></span><br>
+
+    <label>Seats (1-10):</label><br>
+    <input type="number" id="seats"><br>
+    <span id="seatsErr" class="error"></span><br>
+
+    <button type="submit">Book Ticket</button>
+</form>
+
+<div id="ticketDetails"></div>
+
+<script>
+document.getElementById("ticketForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const seats = document.getElementById("seats");
+
+    let valid = true;
+
+    const validate = (input, regex, errorElem, msg) => {
+        if (!regex.test(input.value)) {
+            input.classList.add("invalid");
+            input.classList.remove("valid");
+            errorElem.innerText = msg;
+            return false;
+        }
+        input.classList.add("valid");
+        input.classList.remove("invalid");
+        errorElem.innerText = "";
+        return true;
+    };
+
+    valid &= validate(name, /^[A-Za-z ]+$/, nameErr, "Only alphabets allowed");
+    valid &= validate(email, /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, emailErr, "Invalid Email");
+    valid &= validate(seats, /^([1-9]|10)$/, seatsErr, "Seats must be 1-10");
+
+    if (valid) {
+        const booking = {
+            name: name.value,
+            email: email.value,
+            seats: seats.value
+        };
+
+        document.getElementById("ticketDetails").innerHTML = `
+            <h3>Ticket Confirmed</h3>
+            <p>Name: ${booking.name}</p>
+            <p>Email: ${booking.email}</p>
+            <p>Seats: ${booking.seats}</p>
+        `;
+    }
+});
+</script>
+
+</body>
+</html>

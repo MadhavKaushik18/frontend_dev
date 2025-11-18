@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Library Management</title>
+</head>
+<body>
+
+<h2>Library Management System</h2>
+
+<script>
+class Book {
+    constructor(title, author, isbn, isIssued = false) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.isIssued = isIssued;
+    }
+
+    issueBook() {
+        if (!this.isIssued) {
+            this.isIssued = true;
+            return "Book issued successfully!";
+        }
+        return "Book already issued!";
+    }
+
+    returnBook() {
+        this.isIssued = false;
+        return "Book returned!";
+    }
+}
+
+const books = [
+    new Book("JavaScript Guide", "MDN", "1111"),
+    new Book("Harry Potter", "J.K. Rowling", "2222"),
+    new Book("Rich Dad Poor Dad", "Robert Kiyosaki", "3333", true),
+    new Book("Clean Code", "Robert C. Martin", "4444")
+];
+
+// Display available books
+console.log("Available Books:");
+books.filter(b => !b.isIssued).forEach(b => console.log(b.title));
+
+function issueBookByISBN(isbn) {
+    const book = books.find(b => b.isbn === isbn);
+
+    if (!book) {
+        console.log("Book not found!");
+        return;
+    }
+
+    console.log(book.issueBook());
+}
+
+// Example issuing:
+issueBookByISBN("4444");
+</script>
+
+</body>
+</html>

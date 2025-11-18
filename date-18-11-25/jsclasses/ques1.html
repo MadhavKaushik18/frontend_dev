@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-Commerce Product Manager</title>
+</head>
+<body>
+<h2>E-Commerce Product Manager</h2>
+
+<script>
+// Product class using ES6
+class Product {
+    constructor(id, name, price, category) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.category = category;
+    }
+
+    // Apply discount
+    applyDiscount(percent) {
+        this.price = this.price - (this.price * percent / 100);
+    }
+
+    // Display product details
+    getDetails() {
+        return `ID: ${this.id}, Name: ${this.name}, Price: ₹${this.price}, Category: ${this.category}`;
+    }
+}
+
+// Creating products
+const products = [
+    new Product(1, "Laptop", 55000, "Electronics"),
+    new Product(2, "Shoes", 1200, "Fashion"),
+    new Product(3, "Mouse", 500, "Electronics"),
+    new Product(4, "Chair", 2500, "Furniture")
+];
+
+// Apply discount on all products
+products.forEach(p => p.applyDiscount(10));
+
+// Filter products > 1000
+const expensiveProducts = products.filter(p => p.price > 1000);
+
+console.log("Products above ₹1000:");
+expensiveProducts.forEach(p => console.log(p.getDetails()));
+</script>
+
+</body>
+</html>

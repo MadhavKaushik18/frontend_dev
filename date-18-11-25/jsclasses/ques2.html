@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Student Form Validator</title>
+    <style>
+        .error { color: red; font-size: 14px; }
+        input { padding: 5px; margin: 5px 0; }
+        .invalid { border: 2px solid red; }
+        .valid { border: 2px solid green; }
+    </style>
+</head>
+<body>
+
+<h2>Student Registration Form</h2>
+
+<form id="studentForm">
+    <label>Name:</label><br>
+    <input type="text" id="name"><br>
+    <span class="error" id="nameErr"></span><br>
+
+    <label>Email:</label><br>
+    <input type="text" id="email"><br>
+    <span class="error" id="emailErr"></span><br>
+
+    <label>Phone:</label><br>
+    <input type="text" id="phone"><br>
+    <span class="error" id="phoneErr"></span><br>
+
+    <label>Password:</label><br>
+    <input type="password" id="password"><br>
+    <span class="error" id="passErr"></span><br>
+
+    <button type="submit">Register</button>
+</form>
+
+<script>
+// Reusable validator function
+const validateField = (input, regex, errorElement, message) => {
+    if (!regex.test(input.value)) {
+        input.classList.add("invalid");
+        input.classList.remove("valid");
+        errorElement.innerText = message;
+        return false;
+    }
+    input.classList.add("valid");
+    input.classList.remove("invalid");
+    errorElement.innerText = "";
+    return true;
+};
+
+document.getElementById("studentForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+    const password = document.getElementById("password");
+
+    let valid = true;
+
+    valid &= validateField(name, /^[A-Za-z ]+$/, nameErr, "Only alphabets allowed");
+    valid &= validateField(email, /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, emailErr, "Invalid email format");
+    valid &= validateField(phone, /^[0-9]{10}$/, phoneErr, "Phone must be 10 digits");
+    valid &= validateField(password, /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{6,}$/, passErr, "Password must contain 1 uppercase, 1 number, 1 special char");
+
+    if (valid) {
+        alert("Form Submitted Successfully!");
+    }
+});
+</script>
+
+</body>
+</html>
