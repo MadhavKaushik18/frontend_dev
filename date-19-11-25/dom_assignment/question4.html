@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Switcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .light-theme {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .dark-theme {
+            background-color: #333;
+            color: #f4f4f4;
+        }
+
+        .blue-theme {
+            background-color: #1E3A8A;
+            color: white;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #theme-buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Theme Switcher</h1>
+    <p>Select a theme:</p>
+
+    <div id="theme-buttons">
+        <button onclick="setTheme('light')">Light Theme</button>
+        <button onclick="setTheme('dark')">Dark Theme</button>
+        <button onclick="setTheme('blue')">Blue Theme</button>
+    </div>
+
+    <script>
+        function setTheme(theme) {
+            const body = document.body;
+            body.classList.remove('light-theme', 'dark-theme', 'blue-theme');
+            body.classList.add(`${theme}-theme`);
+
+            body.setAttribute('data-theme', theme);
+        }
+
+        const savedTheme = document.body.getAttribute('data-theme') || 'light';
+        setTheme(savedTheme);
+    </script>
+
+</body>
+</html>

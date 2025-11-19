@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Product List Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #productForm {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #productInput {
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .edit, .delete {
+            cursor: pointer;
+            color: #4CAF50;
+        }
+
+        .delete {
+            color: #e74c3c;
+        }
+
+        .editMode {
+            border: 2px solid #4CAF50;
+            padding: 5px;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dynamic Product List Manager</h1>
+
+    <div id="productForm">
+        <input type="text" id="productInput" placeholder="Enter product name">
+        <button onclick="addProduct()">Add Product</button>
+    </div>
+
+    <ul id="productList">
+    </ul>
+
+    <script>
+        function addProduct() {
+            const input = document.getElementById('productInput');
+            const productName = input.value.trim();
+            if (productName === "") {
+                alert("Please enter a product name!");
+                return;
+            }
+
+            const productList = document.getElementById('productList');
+
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span class="productName">${productName}</span>
+                <div>
+                    <span class="edit">Edit</span>
+                    <span class="delete">Delete</span>
+                </div>
+            `;
+
+            productList.appendChild(li);
+
+            input.value = '';
+        }
+
+        document.getElementById('productList').addEventListener('click', function(e) {
+            const target = e.target;
+            const li = target.closest('li');
+
+            if (target.classList.contains('delete')) {
+                li.remove();
+            } 
+            else if (target.classList.contains('edit')) {
+                enableEditMode(li);
+            }
+        });
+
+        function enableEditMode(li) {
+            const productNameSpan = li.querySelector('.productName');
+            const productName = productNameSpan.textContent;
+
+            const input = document.createElement('input');
+            input.value = productName;
+            input.classList.add('editMode');
+
+            productNameSpan.replaceWith(input);
+
+            input.focus();
+
+            input.addEventListener('blur', function() {
+                saveEditedProduct(li, input.value);
+            });
+
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    saveEditedProduct(li, input.value);
+                }
+            });
+        }
+
+        function saveEditedProduct(li, newName) {
+            const input = li.querySelector('input');
+            const span = document.createElement('span');
+            span.classList.add('productName');
+            span.textContent = newName;
+
+            input.replaceWith(span);
+        }
+    </script>
+
+</body>
+</html>

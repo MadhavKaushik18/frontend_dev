@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Character Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        textarea {
+            width: 80%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #counter {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .warning {
+            color: yellow;
+        }
+
+        .danger {
+            color: red;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Live Character Counter</h1>
+    <textarea id="textInput" maxlength="100" placeholder="Type your text here..."></textarea>
+    <div id="counter">Characters left: 100</div>
+    <button id="resetButton">Reset</button>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        const counter = document.getElementById('counter');
+        const resetButton = document.getElementById('resetButton');
+
+        textInput.addEventListener('input', function(e) {
+            const maxChars = 100;
+            const currentLength = textInput.value.length;
+            const remainingChars = maxChars - currentLength;
+
+            counter.textContent = `Characters left: ${remainingChars}`;
+
+            if (remainingChars <= 20 && remainingChars > 0) {
+                counter.classList.remove('danger');
+                counter.classList.add('warning');
+            } else if (remainingChars === 0) {
+                counter.classList.remove('warning');
+                counter.classList.add('danger');
+                e.preventDefault(); // Prevent further typing when the limit is reached
+            } else {
+                counter.classList.remove('warning', 'danger');
+            }
+        });
+
+        resetButton.addEventListener('click', function() {
+            textInput.value = ''; // Clear the text area
+            counter.textContent = 'Characters left: 100'; // Reset the counter
+            counter.classList.remove('warning', 'danger'); // Reset the counter's color
+        });
+    </script>
+
+</body>
+</html>

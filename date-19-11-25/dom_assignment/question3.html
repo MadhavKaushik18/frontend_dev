@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Step Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            width: 80%;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        #summary {
+            margin-top: 20px;
+            font-size: 18px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Multi-Step Form</h1>
+
+    <div class="form-step active" id="step1">
+        <h2>Step 1: Name</h2>
+        <input type="text" id="name" placeholder="Enter your name">
+        <div id="name-error" class="error"></div>
+        <button id="next1">Next</button>
+    </div>
+
+    <div class="form-step" id="step2">
+        <h2>Step 2: Email</h2>
+        <input type="email" id="email" placeholder="Enter your email">
+        <div id="email-error" class="error"></div>
+        <button id="back2">Back</button>
+        <button id="next2">Next</button>
+    </div>
+
+    <div class="form-step" id="step3">
+        <h2>Step 3: Password</h2>
+        <input type="password" id="password" placeholder="Enter your password">
+        <div id="password-error" class="error"></div>
+        <button id="back3">Back</button>
+        <button id="submit">Submit</button>
+    </div>
+
+    <div id="summary">
+        <h2>Summary</h2>
+        <p><strong>Name:</strong> <span id="summary-name"></span></p>
+        <p><strong>Email:</strong> <span id="summary-email"></span></p>
+        <p><strong>Password:</strong> <span id="summary-password"></span></p>
+    </div>
+
+    <script>
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const summary = document.getElementById('summary');
+
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        const next1 = document.getElementById('next1');
+        const next2 = document.getElementById('next2');
+        const back2 = document.getElementById('back2');
+        const back3 = document.getElementById('back3');
+        const submitButton = document.getElementById('submit');
+
+        const nameError = document.getElementById('name-error');
+        const emailError = document.getElementById('email-error');
+        const passwordError = document.getElementById('password-error');
+
+        let userData = {};
+
+        next1.addEventListener('click', function () {
+            if (validateName()) {
+                userData.name = nameInput.value;
+                step1.classList.remove('active');
+                step2.classList.add('active');
+            }
+        });
+
+        next2.addEventListener('click', function () {
+            if (validateEmail()) {
+                userData.email = emailInput.value;
+                step2.classList.remove('active');
+                step3.classList.add('active');
+            }
+        });
+
+        back2.addEventListener('click', function () {
+            step2.classList.remove('active');
+            step1.classList.add('active');
+        });
+
+        back3.addEventListener('click', function () {
+            step3.classList.remove('active');
+            step2.classList.add('active');
+        });
+
+        submitButton.addEventListener('click', function () {
+            if (validatePassword()) {
+                userData.password = passwordInput.value;
+                showSummary();
+            }
+        });
+
+        function validateName() {
+            if (nameInput.value.trim() === "") {
+                nameError.textContent = "Name is required!";
+                return false;
+            } else {
+                nameError.textContent = "";
+                return true;
+            }
+        }
+
+        function validateEmail() {
+            const email = emailInput.value.trim();
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!email || !emailPattern.test(email)) {
+                emailError.textContent = "Please enter a valid email!";
+                return false;
+            } else {
+                emailError.textContent = "";
+                return true;
+            }
+        }
+
+        function validatePassword() {
+            if (passwordInput.value.trim() === "") {
+                passwordError.textContent = "Password is required!";
+                return false;
+            } else {
+                passwordError.textContent = "";
+                return true;
+            }
+        }
+
+        function showSummary() {
+            step3.classList.remove('active');
+            summary.classList.add('active');
+            document.getElementById('summary-name').textContent = userData.name;
+            document.getElementById('summary-email').textContent = userData.email;
+            document.getElementById('summary-password').textContent = userData.password;
+        }
+    </script>
+
+</body>
+</html>
