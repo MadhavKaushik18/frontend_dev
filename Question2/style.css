@@ -1,0 +1,8 @@
+body{font-family:Arial;padding:20px}
+.products{display:grid;gap:15px}
+.product{padding:15px;border:1px solid #ccc;cursor:pointer;position:relative}
+.fav{float:right;cursor:pointer}
+.selected{color:red}
+.product:hover::after{content:" More details...";color:gray;margin-left:10px}
+[data-discount]{background:#f0ffe0}
+.highlight{background:yellow}

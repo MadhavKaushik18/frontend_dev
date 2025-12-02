@@ -1,0 +1,5 @@
+body{font-family:Arial;padding:20px}
+.question{cursor:pointer;padding:10px;border:1px solid #ccc}
+.answer{display:none;padding:10px}
+.item{margin-bottom:15px}
+.inp{margin-top:10px;padding:5px;width:200px}
